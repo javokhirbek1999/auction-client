@@ -37,6 +37,8 @@ export default function SignUp() {
 	const history = useNavigate();
 	const initialFormData = Object.freeze({
 		email: '',
+		first_name: '',
+		last_name: '',
 		user_name: '',
 		password: '',
 		is_active: true,
@@ -57,13 +59,16 @@ export default function SignUp() {
 		console.log(formData);
 
 		axiosInstance
-			.post(`user/create/`, {
+			.post(`users/create/`, {
 				email: formData.email,
+				first_name: formData.first_name,
+				last_name: formData.last_name,
 				user_name: formData.user_name,
 				password: formData.password,
 				is_active: formData.is_active
 			})
 			.then((res) => {
+				console.log('This: ', formData)
 				history('/login');
 				console.log(res);
 				console.log(res.data);
@@ -91,6 +96,30 @@ export default function SignUp() {
 								label="Email Address"
 								name="email"
 								autoComplete="email"
+								onChange={handleChange}
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<TextField
+								variant="outlined"
+								required
+								fullWidth
+								id="first_name"
+								label="First Name"
+								name="first_name"
+								autoComplete="first_name"
+								onChange={handleChange}
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<TextField
+								variant="outlined"
+								required
+								fullWidth
+								id="last_name"
+								label="Last Name"
+								name="last_name"
+								autoComplete="last_name"
 								onChange={handleChange}
 							/>
 						</Grid>

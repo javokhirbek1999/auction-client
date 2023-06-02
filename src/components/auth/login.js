@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axiosInstance from '../axios/login';
+import axiosInstance from '../../axios';
 import {NavLink, useNavigate} from 'react-router-dom';
 //MaterialUI
 import Avatar from '@material-ui/core/Avatar';
@@ -59,7 +59,7 @@ export default function SignIn() {
         
         setErrorMessage({message: ''})
 
-        axiosInstance.post('api/user/token/', {
+        axiosInstance.post('users/token/', {
             grant_type: 'password',
             email: formData.email,
             password: formData.password,
@@ -71,7 +71,7 @@ export default function SignIn() {
 
       if(errorMessage.message === '') {
         console.log('Yes, credentails are correct')
-        axiosInstance.post('api/user/token/', {
+        axiosInstance.post('users/token/', {
             grant_type: 'password',
             email: formData.email,
             password: formData.password,
