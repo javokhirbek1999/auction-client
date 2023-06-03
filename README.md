@@ -45,6 +45,10 @@ Check out the repo of server-side repository <a href="https://github.com/javokhi
 ## Features
 - <h3> You can bid to on-going auction items </h3>
 ![Imgur](https://i.imgur.com/FHYehsc.png)
+- <h3> Integrated with PayPal
+![Imgur](https://imgur.com/Pox7AX7.png)
+- <h3> You can pay with your PayPal account
+![Imgur](https://imgur.com/1js5f3Z.png)
 - <h3>Shows the bids for the specific items</h3>
 ![Chat Preview](https://imgur.com/GOcLtuR.png)
 <h5>Shows latest stats of each user who bidded:</h5>
