@@ -10,6 +10,7 @@ import Container from '@material-ui/core/Container';
 import {Button} from '@material-ui/core'
 import { NavLink } from 'react-router-dom';
 import axiosInstance from '../axios';
+import { red } from '@mui/material/colors';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -37,6 +38,7 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 
 export default function Profile() {
     let location = useLocation();
+
     const [user, setUser] = useState({
         loading: true,
         user: null,
@@ -49,10 +51,10 @@ export default function Profile() {
     const username = path[path.length-1];
     
     useEffect(() => {
-        axiosInstance.get(`users/all`).then((res) => {
+        axiosInstance.get(`users/user/` + username).then((res) => {
             setUser({
                 loading: false,
-                user: res.data[0]
+                user: res.data
             });
         })
     },[setUser, username])
@@ -77,21 +79,9 @@ export default function Profile() {
                 variant="outlined"
                 className={classes.link}
                             component={NavLink}
-                            to={"/change-password/"+localStorage.getItem('username')}
-                            style={{marginLeft: 5, marginRight: 5}}>
-                                Change Password
-            </Button>:""
-        }
-        { localStorage.getItem('username') === username ?
-            <Button
-            href="#"
-            color="primary"
-            variant="outlined"
-            className={classes.link}
-            component={NavLink}
-            to="/request-password-reset"
-            style={{marginLeft: 5, marginRight: 5}}>
-            Reset Password
+                            to={"/delete-user-confirmation/"+username}
+                            style={{marginLeft: '30%', borderColor: 'red', textDecorationColor: 'red'}}>
+                                Delete Account
             </Button>:""
         }
         </Container>

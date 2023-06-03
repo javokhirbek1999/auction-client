@@ -12,7 +12,7 @@ import Register from './components/auth/register'
 import Login from './components/auth/login'
 import Logout from './components/auth/logout'
 import Profile from './components/Profile'
-import ChangePassword from './components/auth/changePassword'
+import DeleteUser from './components/auth/deleteUser'
 import ResetPassword from './components/auth/resetPassword'
 import Status from './components/Status'
 import RequestPasswordReset from './components/auth/requestPasswordReset'
@@ -33,7 +33,7 @@ const routing = (
               <Route path='/login' element={<Login />} />
               <Route path='/logout' element={<Logout />} />
               <Route path={"/profile/:username"} element={<Profile />} />
-              <Route path={"/change-password/"+localStorage.getItem('username')} element={<ChangePassword/>} />
+              <Route path={"/delete-user-confirmation/"+localStorage.getItem('username')} element={<DeleteUser/>} />
               <Route path='/reset-password/:token' element={<ResetPassword />} />
               <Route path='/status' element={<Status />} />
               <Route path="/request-password-reset" element={<RequestPasswordReset/>}/>
