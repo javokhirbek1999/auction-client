@@ -18,6 +18,7 @@ import { useEffect, useState } from 'react';
 import { CircularProgress } from '@material-ui/core';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core';
 
 
 function Copyright(props) {
@@ -43,7 +44,31 @@ const currencyConverter = Object.freeze({
     'PLN': 'zł'
 })
 
+const useStyles = makeStyles((theme) => ({
+	paper: {
+		marginTop: theme.spacing(8),
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+	},
+	avatar: {
+		margin: theme.spacing(2),
+        width: 150,
+        height: 150,
+		backgroundColor: theme.palette.secondary.main,
+	},
+	form: {
+		width: '100%', // Fix IE 11 issue.
+		marginTop: theme.spacing(1),
+	},
+	submit: {
+		margin: theme.spacing(3, 0, 2),
+	},
+}));
+
 export default function SignInSide() {
+
+    const classes = useStyles()
 
     const location = useLocation()
 
@@ -68,6 +93,7 @@ export default function SignInSide() {
                     setAuctionItemData({
                         loading: false,
                         data: item,
+                        bidPrice: item['price']
                     })
                 }
             })
@@ -87,15 +113,17 @@ export default function SignInSide() {
         })
     },[]);
 
-    console.log(auctionItemData)
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
   };
+
+  const updateBidPrice = (e) => {
+    setAuctionItemData({...auctionItemData, bidPrice:e.target.value.trim()})
+  }
+
+
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -137,11 +165,12 @@ export default function SignInSide() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
+                id="bid-price"
                 label="Bid Price"
-                name="email"
+                name="bid-price"
                 autoComplete="email"
                 autoFocus
+                onChange={updateBidPrice}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -152,6 +181,9 @@ export default function SignInSide() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                className={classes.link}
+                          component={NavLink}
+                          to={"/auction/" + auctionItemData.data['id'] + '-' + auctionItemData.data['name'].split(' ').join('-') + '/pay/' + auctionItemData.bidPrice}
                 >
                 Place a bid
               </Button>

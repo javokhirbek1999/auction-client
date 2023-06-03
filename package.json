@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@paypal/react-paypal-js": "^7.8.1",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@hesenger/react-simpletable": "^0.3.1",
@@ -15,6 +16,7 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.3.0",
     "react": "^18.2.0",
+    "react-paypal-button-v2": "^2.6.3",
     "react-dom": "^18.2.0",
     "react-next-table": "^1.1.4",
     "react-router-dom": "^6.11.2",

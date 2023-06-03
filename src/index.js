@@ -17,6 +17,7 @@ import ResetPassword from './components/auth/resetPassword'
 import Status from './components/Status'
 import RequestPasswordReset from './components/auth/requestPasswordReset'
 import SignInSide from './components/AuctionItem';
+import Checkout from './components/payment';
 
 axiosInstance.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axiosInstance.defaults.xsrfCookieName = "csrftoken";
@@ -37,6 +38,7 @@ const routing = (
               <Route path='/status' element={<Status />} />
               <Route path="/request-password-reset" element={<RequestPasswordReset/>}/>
               <Route path="/auction/:item" element={<SignInSide />} />
+              <Route path="/auction/:item/pay/:bidPrice" index element={<Checkout />}/>
             </Routes>
         <Footer />
      </React.StrictMode>
