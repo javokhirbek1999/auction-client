@@ -20,6 +20,7 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
 import EditAuctionItem from './editAuction';
+import csvDownload from 'json-to-csv-export';
 
 
 function Copyright(props) {
@@ -126,6 +127,13 @@ export default function SignInSide() {
     setAuctionItemData({...auctionItemData, bidPrice:e.target.value.trim()})
   }
 
+  const dataToDownload = {
+    data: auctionItemData.loading === true ? [] : [auctionItemData.data],
+    filename: `auctionItemData-${id}-${new Date()}`,
+    delimiter: ',',
+    // headers: ['name','description', 'thumbnail', 'price', 'status', 'endDate']
+  }
+  
   console.log(auctionItemData)
 
 
@@ -195,8 +203,19 @@ export default function SignInSide() {
             </Box>
           </Box>
         </Grid> : <EditAuctionItem />}</>}
+        {auctionItemData.loading === true || auctionItemData.data === null ? <></> : 
+      <Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        sx={{ mt: 3, mb: 2}}
+        className={classes.link}
+        onClick={() => csvDownload(dataToDownload)}>
+        Download Item data
+      </Button>
+}
       </Grid>
-
+      
        <TableContainer component={Paper} style={{marginTop: '15%'}}>
         <Table sx={{midWidth: 650}} aria-label="simple table">
           <TableHead>

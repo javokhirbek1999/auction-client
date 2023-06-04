@@ -47,6 +47,8 @@ Check out the repo of server-side repository <a href="https://github.com/javokhi
 ![Imgur](https://imgur.com/QnBPe2p.png)
 - <h3>You can edit and delete your own auctions. And you can also sell your item for the highest bid price</h3>
 ![Imgur](https://imgur.com/ssuUEIl.png)
+- <h3>You can also download auction item data as a CSV file </h3>
+![Imgur](https://imgur.com/6IUfIOW.png)
 - <h3> You can bid to on-going auction items </h3>
 ![Imgur](https://i.imgur.com/FHYehsc.png)
 - <h3> Integrated with PayPal
