@@ -19,6 +19,7 @@ import { CircularProgress } from '@material-ui/core';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
+import EditAuctionItem from './editAuction';
 
 
 function Copyright(props) {
@@ -89,7 +90,7 @@ export default function SignInSide() {
     useEffect(() => {
         axiosInstance.get('auction/').then((res) => {
             res.data.map((item) => {
-                if (item['id'] == id) {
+                if (parseInt(item['id']) == id) {
                     setAuctionItemData({
                         loading: false,
                         data: item,
@@ -103,7 +104,7 @@ export default function SignInSide() {
     },[]);
 
     useEffect(() => {
-        axiosInstance.get('auction/bids/' + id).then((res) => {
+        axiosInstance.get('auction/bids/all/' + id).then((res) => {
             setBidsData({
                 loading: false,
                 data: res.data,
@@ -113,6 +114,8 @@ export default function SignInSide() {
         })
     },[]);
 
+    
+    const isOwner = auctionItemData.loading == true ? null : auctionItemData.data.auctioneer == localStorage.getItem('userID')
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -123,6 +126,7 @@ export default function SignInSide() {
     setAuctionItemData({...auctionItemData, bidPrice:e.target.value.trim()})
   }
 
+  console.log(auctionItemData)
 
 
   return (
@@ -140,11 +144,10 @@ export default function SignInSide() {
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
             t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 'cover',
+            backgroundSize: 'small',
             backgroundPosition: 'center',
         }}
-        />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        /> {isOwner !== true ? <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
                 my: 8,
@@ -191,10 +194,10 @@ export default function SignInSide() {
               <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
-        </Grid></>}
+        </Grid> : <EditAuctionItem />}</>}
       </Grid>
 
-       <TableContainer component={Paper}>
+       <TableContainer component={Paper} style={{marginTop: '15%'}}>
         <Table sx={{midWidth: 650}} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -207,6 +210,7 @@ export default function SignInSide() {
           <TableBody>
             {bidsData.data.map(item => {
               const {bidDate, bidPrice, get_bidder_details, get_item_details, bidID, status} = item
+              console.log(get_bidder_details, get_item_details)
               return ( <>
               <TableRow 
                 key={bidID}

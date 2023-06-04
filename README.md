@@ -2,7 +2,7 @@ Auction Client [Semester 4 - REST Oriented Web Services]
 ============
 <!-- [![GitHub Stars](https://img.shields.io/github/stars/IgorAntun/node-chat.svg)](https://github.com/IgorAntun/node-chat/stargazers) [![GitHub Issues](https://img.shields.io/github/issues/IgorAntun/node-chat.svg)](https://github.com/IgorAntun/node-chat/issues) [![Current Version](https://img.shields.io/badge/version-1.0.7-green.svg)](https://github.com/IgorAntun/node-chat) [![Live Demo](https://img.shields.io/badge/demo-online-green.svg)](https://igorantun.com/chat) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/IgorAntun/node-chat?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) -->
 
-<a href="http://kiska-url.herokuapp.com/" target="_blank">EasyAuction</a> is an online Auction web service. <br/>
+EasyAuction is an online Auction web service. <br/>
 This is a <i>ReactJS</i> client running on NodeJS server. <br/>
 Check out the repo of server-side repository <a href="https://github.com/javokhirbek1999/auction-server-side" target="_blank">here</a> 
 

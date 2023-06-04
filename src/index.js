@@ -13,11 +13,11 @@ import Login from './components/auth/login'
 import Logout from './components/auth/logout'
 import Profile from './components/Profile'
 import DeleteUser from './components/auth/deleteUser'
-import ResetPassword from './components/auth/resetPassword'
+import EditUser from './components/auth/editUser'
 import Status from './components/Status'
-import RequestPasswordReset from './components/auth/requestPasswordReset'
 import SignInSide from './components/AuctionItem';
 import Checkout from './components/payment';
+import AddAuction from './components/addAuction';
 
 axiosInstance.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axiosInstance.defaults.xsrfCookieName = "csrftoken";
@@ -33,12 +33,12 @@ const routing = (
               <Route path='/login' element={<Login />} />
               <Route path='/logout' element={<Logout />} />
               <Route path={"/profile/:username"} element={<Profile />} />
-              <Route path={"/delete-user-confirmation/"+localStorage.getItem('username')} element={<DeleteUser/>} />
-              <Route path='/reset-password/:token' element={<ResetPassword />} />
+              <Route path={"/delete-user-confirmation/"+localStorage.getItem('username')} element={<DeleteUser/>} /> 
               <Route path='/status' element={<Status />} />
-              <Route path="/request-password-reset" element={<RequestPasswordReset/>}/>
               <Route path="/auction/:item" element={<SignInSide />} />
               <Route path="/auction/:item/pay/:bidPrice" index element={<Checkout />}/>
+              <Route path={"/edit-user/" + localStorage.getItem("username")} element={<EditUser />}/>
+              <Route path={"/add-auction/:username"} element={<AddAuction />} />
             </Routes>
         <Footer />
      </React.StrictMode>

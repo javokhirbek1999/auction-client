@@ -79,6 +79,7 @@ export default function SignIn() {
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('username', res.data.username);
             localStorage.setItem('email', res.data.email)
+            localStorage.setItem('userID', res.data.user_id)
             history('/');
             window.location.reload();
         });

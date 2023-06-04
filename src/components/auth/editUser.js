@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axiosInstance from '../axios/login';
+import axiosInstance from '../../axios';
 import {useNavigate, useLocation} from 'react-router-dom';
 //MaterialUI
 import Avatar from '@material-ui/core/Avatar';
@@ -9,6 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { useEffect } from 'react';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,12 +33,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function ResetPassword() {
+export default function EditUser() {
     let location = useLocation();
     const history = useNavigate();
     const initialFormData = Object.freeze({
-        new_password: '',
-        confirm_password: ''
+        email: '',
+        first_name: '',
+        last_name: '',
+        password: ''
     });
 
     const [formData, updateFormDate] = useState(initialFormData);
@@ -45,49 +48,64 @@ export default function ResetPassword() {
 
     const [errorMessage, setErrorMessage] = useState({message: ''});
 
+    const [userData, setUserData] = useState({
+        loading: true,
+        data: null
+    })
+
+
+    useEffect(() => {
+        axiosInstance.get('users/user/' + localStorage.getItem('username')).
+        then((res) => {
+            setUserData({
+                loading: false,
+                data: res.data
+            })
+        }).catch((error) => {
+            console.log(error)
+        })
+    },[])
+
     const handleChange = (e) => {
         updateFormDate({
             ...formData,
             [e.target.name]: e.target.value.trim(),
         });
+
+
     };
     let path = location.pathname.split('/');
-    console.log(`This is location: ${path[path.length-1]}`);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         
         setErrorMessage({message: ''})
         
-        //Set new password endpoint
-        let update_url = 'api/user/password-reset/'+path[path.length-1]+'/';
+        let update_url = 'users/user/'+path[path.length-1];
         
-        console.log(`This is updated URL: ${update_url}`);
-
         axiosInstance.put(update_url, {
-            grant_type: 'password',
-            new_password: formData.new_password,
-            confirm_password: formData.confirm_password,
+            email: formData.email !== '' ? formData.email : userData.data['email'],
+            first_name: formData.first_name !== '' ? formData.first_name : userData.data['first_name'],
+            last_name: formData.last_name !== '' ? formData.last_name : userData.data['last_name'],
+            password: formData.password
         }).catch(function (error) {
             if(error.message) {
-                setErrorMessage({message: "Passwords did not match"});
+                setErrorMessage({message: "Make sure all the fields are filled"});
             }
         });
 
       if(errorMessage.message === '') {
-        
-        console.log('Yes, credentails are correct')
 
         axiosInstance.put(update_url, {
-            grant_type: 'password',
-            new_password: formData.new_password,
-            confirm_password: formData.confirm_password,
+            email: formData.email !== '' ? formData.email : userData.data['email'],
+            first_name: formData.first_name !== '' ? formData.first_name : userData.data['first_name'],
+            last_name: formData.last_name !== '' ? formData.last_name : userData.data['last_name'],
+            password: formData.password
         }).then((res) => {
-            history('/login');
+            history('/profile/' + localStorage.getItem('username'));
             window.location.reload();
         });
-      }  
+      }
     };
 
     const classes = useStyles();
@@ -95,10 +113,10 @@ export default function ResetPassword() {
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
-            <div className={classes.paper}>
+            {userData.loading == true ? <></> : <div className={classes.paper}>
                     <Avatar className={classes.avatar}></Avatar>
                     <Typography component="h1" variant="h5">
-                        Reset Password
+                        Edit your profile
                     </Typography>
                     <h4 style={{color: 'red'}}>{errorMessage.message}</h4>
                     <form className={classes.form} noValidate>
@@ -107,11 +125,11 @@ export default function ResetPassword() {
                             margin="normal"
                             required
                             fullWidth
-                            id="new_password"
-                            label="New Password"
-                            name="new_password"
+                            id="first_name"
+                            label="First Name"
+                            name="first_name"
                             autoComplete="email"
-                            autoFocus
+                            defaultValue={userData.data['first_name']}
                             onChange={handleChange}
                         />
                         <TextField
@@ -119,11 +137,35 @@ export default function ResetPassword() {
                             margin="normal"
                             required
                             fullWidth
-                            id="confirm_password"
-                            label="Confirm Password"
-                            name="confirm_password"
+                            id="last_name"
+                            label="Last Name"
+                            name="last_name"
                             autoComplete="email"
-                            autoFocus
+                            defaultValue={userData.data['last_name']}
+                            onChange={handleChange}
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email"
+                            name="email"
+                            autoComplete="email"
+                            defaultValue={userData.data['email']}
+                            onChange={handleChange}
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="password"
+                            label="Password"
+                            name="password"
+                            autoComplete="password"
+                            type='password'
                             onChange={handleChange}
                         />
                         <Button
@@ -138,6 +180,7 @@ export default function ResetPassword() {
                         </Button>
                     </form>
             </div>
+}
         </Container>
     );
 }
