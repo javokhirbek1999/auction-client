@@ -77,7 +77,7 @@ function App() {
               
               <Grid item key={auction.id} xs={12} sm={6} md={4} >
                 <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                  {new Date(auction['endDate']) > new Date() ? <ImgMediaCard auctionData={auction}/>:<></>}
+                  {new Date(auction['endDate']) > new Date() && auction['status'] === 'In-auction' ? <ImgMediaCard auctionData={auction}/>:<></>}
                 </Card>
               </Grid>
             ))}

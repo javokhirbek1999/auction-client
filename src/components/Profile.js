@@ -46,7 +46,7 @@ export default function Profile() {
         user: null,
     });
 
-    const [userAutionItems, setUserAuctionItems] = useState({
+    const [userAuctionItems, setUserAuctionItems] = useState({
         loading: true,
         data: [],
     })
@@ -76,6 +76,7 @@ export default function Profile() {
             console.log(error)
         })
     },[])
+
     
     return (user.loading == true ? <></> : <><Container component="main" maxWidth="md">
             <CssBaseline />
@@ -133,11 +134,10 @@ export default function Profile() {
         <div id='results-container' component={Paper}>
                       <Container sx={{ py: 8 }} maxWidth="md">
           <Grid container spacing={4}>
-            {userAutionItems.data.map((auction) => (
-              
-              <Grid item key={auction.id} xs={12} sm={6} md={4} >
+            {userAuctionItems.data.map((auction) => (
+                <Grid item key={auction.id} xs={12} sm={6} md={4} >
                 <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                  {new Date(auction['endDate']) > new Date() ? <ImgMediaCard auctionData={auction}/>:<></>}
+                  {new Date(auction['endDate']) > new Date() && auction['status'] === "In-auction" ? <ImgMediaCard auctionData={auction}/>:<></>}
                 </Card>
               </Grid>
             ))}

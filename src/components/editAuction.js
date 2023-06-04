@@ -112,6 +112,28 @@ export default function AddAuction() {
 			});
 	};
 
+    const sellTheItem = (e) => {
+        e.preventDefault();
+
+        axiosInstance.put(`auction/users/` + localStorage.getItem('username') + '/' + currentAuctionItemID + '/sell', {
+            auctioneer: localStorage.getItem('userID'),
+            name: formData.name,
+            description: formData.description,
+            thumbnail: formData.thumbnail,
+            category: 2,
+            price: formData.price,
+            currency: 'USD',
+            endDate: formData.endDate,
+            status: 'Sold'
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+        .then((res) => {
+            history('/profile/' + localStorage.getItem('username'))
+        })
+    }
+
     const removeItem = (e) => {
         e.preventDefault();
 
@@ -231,7 +253,7 @@ export default function AddAuction() {
 						variant="contained"
 						color="primary"
 						className={classes.submit}
-						onClick={handleSubmit}
+						onClick={sellTheItem}
                         style={{backgroundColor: 'green'}}
 					>
 						Sell

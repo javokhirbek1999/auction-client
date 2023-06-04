@@ -43,6 +43,10 @@ Check out the repo of server-side repository <a href="https://github.com/javokhi
 ---
 
 ## Features
+- <h3>You can easily put anything to an auction and you can easily manage your auctions in your profile page:</h3>
+![Imgur](https://imgur.com/QnBPe2p.png)
+- <h3>You can edit and delete your own auctions. And you can also sell your item for the highest bid price</h3>
+![Imgur](https://imgur.com/ssuUEIl.png)
 - <h3> You can bid to on-going auction items </h3>
 ![Imgur](https://i.imgur.com/FHYehsc.png)
 - <h3> Integrated with PayPal
@@ -66,7 +70,7 @@ Check out the repo of server-side repository <a href="https://github.com/javokhi
 <p style="font-size: 10px">Once the User logs in, it receives the Token from the server and sets it in <strong><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization" target="_blank">Authorization Headers</a></strong> and saves it in the <strong><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">LocalStorage</a></strong> so User do not have to enter authentication credentials everytime</p>
 
 - <h3>Profile page:</h3>
-  <img src="https://imgur.com/wyy7vqq.png" />
+  <img src="https://imgur.com/QnBPe2p.png" />
   <p>Users can delete their profile</p>
   <p>User has to confirm deleting his/her account</p>
 - <h3>Account deleting confirmation</h3>
