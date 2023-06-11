@@ -57,9 +57,9 @@ export default function RecipeReviewCard(auctionData) {
   const [expanded, setExpanded] = React.useState(false);
   // console.log(auctionData)
 
-  const {category, currency, description, endDate, get_auctioneer_details, id, name, price, thumbnail} = auctionData.auctionData
+  const {category, currency, description, endDate, get_owner_details, id, name, price, thumbnail} = auctionData.auctionData
 
-  const {first_name, last_name, user_name, email, date_joined, date_updated} = get_auctioneer_details
+  const {first_name, last_name, user_name, email, date_joined, date_updated} = get_owner_details
 
   const handleExpandClick = () => {
     setExpanded(!expanded);

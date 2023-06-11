@@ -70,7 +70,7 @@ export default function AddAuction() {
     console.log(auctionItemData)
 
 	const initialFormData = Object.freeze({
-		auctioneer: localStorage.getItem('userID'),
+		owner: localStorage.getItem('userID'),
 		name: auctionItemData.loading === true ? '' : auctionItemData.data['name'],
 		description: auctionItemData.loading === true ? '' : auctionItemData.data['description'],
 		thumbnail: auctionItemData.loading === true ? '' : auctionItemData.data['thumbnail'],
@@ -96,7 +96,7 @@ export default function AddAuction() {
 
 		axiosInstance
 			.put(`auction/users/${localStorage.getItem('username')}/${currentAuctionItemID}`, {
-				auctioneer: localStorage.getItem('userID'),
+				owner: localStorage.getItem('userID'),
 				name: formData.name,
 				description: formData.description,
 				thumbnail: formData.thumbnail,
@@ -116,7 +116,7 @@ export default function AddAuction() {
         e.preventDefault();
 
         axiosInstance.put(`auction/users/` + localStorage.getItem('username') + '/' + currentAuctionItemID + '/sell', {
-            auctioneer: localStorage.getItem('userID'),
+            owner: localStorage.getItem('userID'),
             name: formData.name,
             description: formData.description,
             thumbnail: formData.thumbnail,

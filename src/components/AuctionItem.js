@@ -116,16 +116,15 @@ export default function SignInSide() {
     },[]);
 
     
-    const isOwner = auctionItemData.loading == true ? null : auctionItemData.data.auctioneer == localStorage.getItem('userID')
+    const isOwner = auctionItemData.loading == true ? null : auctionItemData.data.owner == localStorage.getItem('userID')
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+    };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-  };
-
-  const updateBidPrice = (e) => {
-    setAuctionItemData({...auctionItemData, bidPrice:e.target.value.trim()})
-  }
+    const updateBidPrice = (e) => {
+      setAuctionItemData({...auctionItemData, bidPrice:e.target.value.trim()})
+    }
 
   const dataToDownload = {
     data: auctionItemData.loading === true ? [] : [auctionItemData.data],
@@ -166,7 +165,7 @@ export default function SignInSide() {
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              {auctionItemData.data['get_auctioneer_details']['first_name'].slice(0,1) + auctionItemData.data['get_auctioneer_details']['last_name'].slice(0,1)}
+              {auctionItemData.data['get_owner_details']['first_name'].slice(0,1) + auctionItemData.data['get_owner_details']['last_name'].slice(0,1)}
             </Avatar>
             <Typography component="h1" variant="h5">
               {auctionItemData.data['name']}

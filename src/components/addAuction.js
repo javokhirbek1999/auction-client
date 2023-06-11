@@ -40,7 +40,7 @@ export default function AddAuction() {
 	const history = useNavigate();
 
 	const initialFormData = Object.freeze({
-		auctioneer: localStorage.getItem('userID'),
+		owner: localStorage.getItem('userID'),
 		name: '',
 		description: '',
 		thumbnail: '',
@@ -67,7 +67,7 @@ export default function AddAuction() {
 
 		axiosInstance
 			.post(`auction/`, {
-				auctioneer: localStorage.getItem('userID'),
+				owner: localStorage.getItem('userID'),
 				name: formData.name,
 				description: formData.description,
 				thumbnail: formData.thumbnail,

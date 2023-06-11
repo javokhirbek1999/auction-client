@@ -84,7 +84,7 @@ const onError = (data, actions) => {
       alert("Your Bid has been placed successfully");
       axiosInstance.post('/auctions/bids/', {
         item: id,
-        bidder: get_auctioneer_details['id'],
+        bidder: localStorage.getItem('id'),
         bidPrice: bidPrice,
         status: 'Bid'
       })
